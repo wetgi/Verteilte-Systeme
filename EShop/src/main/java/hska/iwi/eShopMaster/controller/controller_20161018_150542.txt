@@ -1,5 +1,0 @@
-WARNING - 15:05:42: First conversion pass
-ERROR - 15:05:42: java.net.MalformedURLException: unknown protocol: pathmap
-WARNING - 15:05:51: Convert hska.iwi.eShopMaster.controller
-WARNING - 15:05:51: First conversion pass
-ERROR - 15:05:51: java.net.MalformedURLException: unknown protocol: pathmap
