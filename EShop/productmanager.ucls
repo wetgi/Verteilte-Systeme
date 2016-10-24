@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.11" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="hska.iwi.eShopMaster.model.businessLogic.manager.ProductManager" 
+    project="EShop" file="/EShop/src/main/java/hska/iwi/eShopMaster/model/businessLogic/manager/ProductManager.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="491" x="489" y="613"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" name="hska.iwi.eShopMaster.controller.AddProductAction" project="EShop" 
+    file="/EShop/src/main/java/hska/iwi/eShopMaster/controller/AddProductAction.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="456" width="275" x="938" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="hska.iwi.eShopMaster.controller.SearchAction" project="EShop" 
+    file="/EShop/src/main/java/hska/iwi/eShopMaster/controller/SearchAction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="536" width="275" x="330" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="hska.iwi.eShopMaster.controller.ListAllProductsAction" project="EShop" 
+    file="/EShop/src/main/java/hska/iwi/eShopMaster/controller/ListAllProductsAction.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="256" width="249" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="hska.iwi.eShopMaster.controller.ProductDetailsAction" project="EShop" 
+    file="/EShop/src/main/java/hska/iwi/eShopMaster/controller/ProductDetailsAction.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="496" width="253" x="645" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="6">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="7">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="8">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
