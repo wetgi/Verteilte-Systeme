@@ -1,0 +1,300 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: eShop API
+  description: Microservices ftw
+  version: "1.0.0"
+# the domain of the service
+host: api.uber.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /users:
+    get:
+      summary: All users
+      tags:
+        - user
+      responses:
+        200:
+          description: Success
+        401:
+          description: Failed
+    post:
+      summary: Creates a new user.
+      parameters:
+        - name: newUser
+          in: body
+          description: Information about the new user.
+          schema:
+            $ref: '#/definitions/User'
+          required: true
+      tags:
+        - user
+      responses:
+        200:
+          description: Created the user.
+          schema:
+            $ref: '#/definitions/User'
+        405:
+          description: User already in system.
+          schema:
+            $ref: '#/definitions/Error'
+      
+  /users/{userId}:
+      get:
+        summary: Get details for a certain user.
+        parameters:
+          - name: userId
+            in: path
+            description: Get details for user
+            required: true
+            type: number
+            format: int
+        tags:
+          - user
+        responses:
+          200:
+            description: Returns the user
+            schema:
+              $ref: '#/definitions/User'
+          404:
+            description: User not found
+            schema:
+              $ref: '#/definitions/Error'
+            
+  /products:
+    get:
+      summary: All products
+      description: |
+      tags:
+        - product
+      responses:
+        200:
+          description: An array of product
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Creates a new product.
+      parameters:
+        - name: newProduct
+          in: body
+          description: Information about the new product.
+          schema:
+            $ref: '#/definitions/Product'
+          required: true
+        - name: userId
+          in: header
+          description: The requesting user
+          required: true
+          type: number
+          format: int
+      tags:
+        - product
+      responses:
+        200:
+          description: Created the product.
+          schema:
+            $ref: '#/definitions/Product'
+        405:
+          description: product already in system.
+          schema:
+            $ref: '#/definitions/Error'
+   
+  /products/{productId}:
+      get:
+        summary: Get details to a certain product.
+        parameters:
+          - name: productId
+            in: path
+            description: Get details for product
+            required: true
+            type: number
+            format: int
+        tags:
+          - product
+        responses:
+          200:
+            description: Returns the product
+            schema:
+              $ref: '#/definitions/Product'
+          404:
+            description: Product not found
+            schema:
+              $ref: '#/definitions/Error'
+              
+  /categories:
+    get:
+      summary: All categories
+      description: |
+      tags:
+        - product
+      responses:
+        200:
+          description: An array of categories
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Creates a new category.
+      parameters:
+        - name: newProduct
+          in: body
+          description: Information about the new category.
+          schema:
+            $ref: '#/definitions/Category'
+          required: true
+        - name: userId
+          in: header
+          description: The requesting user
+          required: true
+          type: number
+          format: int
+      tags:
+        - category
+      responses:
+        200:
+          description: Created the category.
+          schema:
+            $ref: '#/definitions/Category'
+        405:
+          description: Category already in system.
+          schema:
+            $ref: '#/definitions/Error'
+   
+  /categories/{categoryId}:
+      get:
+        summary: Get details to a certain category.
+        parameters:
+          - name: categoryId
+            in: path
+            description: Get details for category
+            required: true
+            type: number
+            format: int
+        tags:
+          - product
+        responses:
+          200:
+            description: Returns the product
+            schema:
+              $ref: '#/definitions/Product'
+          404:
+            description: Product not found
+            schema:
+              $ref: '#/definitions/Error'
+      delete:
+        summary: Delete a certain category.
+        parameters:
+          - name: categoryId
+            in: path
+            description: Deletes a category
+            required: true
+            type: number
+            format: int
+          - name: userId
+            in: header
+            description: The requesting user
+            required: true
+            type: number
+            format: int
+        tags:
+          - product
+        responses:
+          200:
+            description: Success
+          404:
+            description: Product not found
+            schema:
+              $ref: '#/definitions/Error'
+        
+              
+  /me:
+    get:
+      summary: User Profile
+      description: The User Profile endpoint returns information about the Uber user that has authorized with the application.
+      tags:
+        - User
+      responses:
+        200:
+          description: Profile information for a user
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+definitions:
+  Product:
+    type: object
+    properties:
+      productId:
+        type: string
+        description: Unique identifier of the product.
+      details:
+        type: string
+        description: Description of product.
+      name:
+        type: string
+        description: Display name of product.
+      price:
+        type: number
+        format: double
+        description: Price of the product.
+      categoryId:
+        type: integer
+        description: Id of the related category.
+  User:
+    type: object
+    properties:
+      userId:
+        type: integer
+        description: Id of the user.
+      firstname:
+        type: string
+        description: First name of the user.
+      lastname:
+        type: string
+        description: Last name of the user.
+      password:
+        type: string
+        description: Password of the user.
+      role:
+        type: integer
+        description: The role of the user.
+  Category:
+    type: object
+    properties:
+      categoryId:
+        type: integer
+        description: Id of the category.
+      name:
+        type: string
+        description: Name of the category.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
