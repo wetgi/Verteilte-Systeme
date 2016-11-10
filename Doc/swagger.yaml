@@ -3,7 +3,7 @@
 swagger: '2.0'
 info:
   title: eShop API
-  description: Microservices ftw
+  description: Microservices
   version: "1.0.0"
 # the domain of the service
 host: api.uber.com
@@ -17,7 +17,7 @@ produces:
 paths:
   /users:
     get:
-      summary: All users
+      summary: Retrieves all users
       tags:
         - user
       responses:
@@ -54,8 +54,7 @@ paths:
             in: path
             description: Get details for user
             required: true
-            type: number
-            format: int
+            type: integer
         tags:
           - user
         responses:
@@ -72,6 +71,24 @@ paths:
     get:
       summary: All products
       description: |
+      parameters:
+        - name: searchString
+          in: query
+          description: Get details for product
+          required: false
+          type: string
+        - name: minPrice
+          in: query
+          description: Get details for product
+          required: false
+          type: number
+          format: double
+        - name: maxPrice
+          in: query
+          description: Get details for product
+          required: false
+          type: number
+          format: double
       tags:
         - product
       responses:
@@ -98,8 +115,7 @@ paths:
           in: header
           description: The requesting user
           required: true
-          type: number
-          format: int
+          type: integer
       tags:
         - product
       responses:
@@ -120,8 +136,7 @@ paths:
             in: path
             description: Get details for product
             required: true
-            type: number
-            format: int
+            type: integer
         tags:
           - product
         responses:
@@ -133,13 +148,35 @@ paths:
             description: Product not found
             schema:
               $ref: '#/definitions/Error'
+      delete:
+        summary: Delete a certain product.
+        parameters:
+          - name: productId
+            in: path
+            description: Deletes a product
+            required: true
+            type: integer
+          - name: userId
+            in: header
+            description: The requesting user
+            required: true
+            type: integer
+        tags:
+          - product
+        responses:
+          200:
+            description: Success
+          404:
+            description: Product not found
+            schema:
+              $ref: '#/definitions/Error'
               
   /categories:
     get:
       summary: All categories
       description: |
       tags:
-        - product
+        - category
       responses:
         200:
           description: An array of categories
@@ -164,8 +201,7 @@ paths:
           in: header
           description: The requesting user
           required: true
-          type: number
-          format: int
+          type: integer
       tags:
         - category
       responses:
@@ -186,8 +222,7 @@ paths:
             in: path
             description: Get details for category
             required: true
-            type: number
-            format: int
+            type: integer
         tags:
           - product
         responses:
@@ -206,14 +241,12 @@ paths:
             in: path
             description: Deletes a category
             required: true
-            type: number
-            format: int
+            type: integer
           - name: userId
             in: header
             description: The requesting user
             required: true
-            type: number
-            format: int
+            type: integer
         tags:
           - product
         responses:
@@ -230,7 +263,7 @@ paths:
       summary: User Profile
       description: The User Profile endpoint returns information about the Uber user that has authorized with the application.
       tags:
-        - User
+        - user
       responses:
         200:
           description: Profile information for a user
