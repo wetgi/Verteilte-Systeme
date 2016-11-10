@@ -6,7 +6,7 @@ info:
   description: Microservices
   version: "1.0.0"
 # the domain of the service
-host: api.uber.com
+host: vislab.hska.de
 # array of all schemes that your API supports
 schemes:
   - https
@@ -256,24 +256,7 @@ paths:
             description: Product not found
             schema:
               $ref: '#/definitions/Error'
-        
-              
-  /me:
-    get:
-      summary: User Profile
-      description: The User Profile endpoint returns information about the Uber user that has authorized with the application.
-      tags:
-        - user
-      responses:
-        200:
-          description: Profile information for a user
-          schema:
-            $ref: '#/definitions/User'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-            
+       
 definitions:
   Product:
     type: object
@@ -303,9 +286,12 @@ definitions:
       firstname:
         type: string
         description: First name of the user.
-      lastname:
+      name:
         type: string
         description: Last name of the user.
+      username:
+        type: string
+        description: Username of the user.
       password:
         type: string
         description: Password of the user.
