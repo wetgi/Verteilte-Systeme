@@ -14,6 +14,16 @@ schemes:
 basePath: /v1
 produces:
   - application/json
+  
+securityDefinitions:
+      UserSecurity:
+        type: basic
+      AdminSecurity:
+        type: basic
+        
+security:
+- UserSecurity: [] 
+
 paths:
   /users:
     get:
@@ -45,7 +55,7 @@ paths:
           description: User already in system.
           schema:
             $ref: '#/definitions/Error'
-      
+    
   /users/{userId}:
       get:
         summary: Get details for a certain user.
@@ -104,6 +114,8 @@ paths:
             $ref: '#/definitions/Error'
     post:
       summary: Creates a new product.
+      security:
+        - AdminSecurity: []
       parameters:
         - name: newProduct
           in: body
@@ -150,6 +162,8 @@ paths:
               $ref: '#/definitions/Error'
       delete:
         summary: Delete a certain product.
+        security:
+        - AdminSecurity: []
         parameters:
           - name: productId
             in: path
@@ -190,6 +204,8 @@ paths:
             $ref: '#/definitions/Error'
     post:
       summary: Creates a new category.
+      security:
+      - AdminSecurity: []
       parameters:
         - name: newProduct
           in: body
@@ -236,6 +252,8 @@ paths:
               $ref: '#/definitions/Error'
       delete:
         summary: Delete a certain category.
+        security:
+          - AdminSecurity: []
         parameters:
           - name: categoryId
             in: path
