@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: eShop API
-  description: Microservices
+  description: vis-lab Microservices
   version: "1.0.0"
 # the domain of the service
 host: vislab.hska.de
@@ -85,18 +85,18 @@ paths:
       parameters:
         - name: searchString
           in: query
-          description: Get details for product
+          description: Is contained in product name?
           required: false
           type: string
         - name: minPrice
           in: query
-          description: Get details for product
+          description: Does product cost at least x?
           required: false
           type: number
           format: double
         - name: maxPrice
           in: query
-          description: Get details for product
+          description: Does product cost at max x?
           required: false
           type: number
           format: double
@@ -247,14 +247,14 @@ paths:
             required: true
             type: integer
         tags:
-          - product
+          - category
         responses:
           200:
-            description: Returns the product
+            description: Returns the category
             schema:
-              $ref: '#/definitions/Product'
+              $ref: '#/definitions/Category'
           404:
-            description: Product not found
+            description: Category not found
             schema:
               $ref: '#/definitions/Error'
       delete:
@@ -273,12 +273,12 @@ paths:
             required: true
             type: integer
         tags:
-          - product
+          - category
         responses:
           200:
             description: Success
           404:
-            description: Product not found
+            description: Category not found
             schema:
               $ref: '#/definitions/Error'
        
