@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.hska</groupId>
-	<artifactId>EShop</artifactId>
+	<artifactId>EShop-Eureka</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
