@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.hska</groupId>
-	<artifactId>EShop-Category</artifactId>
+	<artifactId>category-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>microservice-eshop-category</name>
-	<description>Microservice Eshop Categories</description>
+	<name>category-service</name>
+	<description>Category Service</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
