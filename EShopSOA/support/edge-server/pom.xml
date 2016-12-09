@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.hska</groupId>
-	<artifactId>EShop-zuul</artifactId>
+	<artifactId>microservice-eshop-edge</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>microservice-eshop-zuul</name>
-	<description>Microservice Eshop Zuul API Gateway</description>
+	<name>microservice-eshop-edge</name>
+	<description>Microservice Edge Server with Zuul (API Gateway)</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

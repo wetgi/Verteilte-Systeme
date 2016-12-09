@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.hska</groupId>
-	<artifactId>EShop-Product</artifactId>
+	<artifactId>product-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>microservice-eshop-product</name>
+	<name>product-service</name>
 	<description>Microservice Eshop Products</description>
 
 	<parent>
