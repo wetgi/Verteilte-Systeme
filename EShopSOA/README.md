@@ -4,12 +4,14 @@
 
 **Core:**
 
- - Product
- - Category
+ - Product Service
+ - Category Service
 
 **Support:**
 
-   - Discovery-Server
-   - Edeg-Server
+   - Discovery Server
+   - Edeg Server
 
 **Composite:**
+
+  - Product-Category Service
