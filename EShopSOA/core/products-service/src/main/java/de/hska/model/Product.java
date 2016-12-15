@@ -17,7 +17,7 @@ public class Product   {
   @JsonProperty("productId")
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
-  private String productId = null;
+  private int productId;
 
   @JsonProperty("details")
   private String details = null;
@@ -36,7 +36,7 @@ public class Product   {
    * @return productId
   **/
   @ApiModelProperty(value = "Unique identifier of the product.")
-  public String getProductId() {
+  public int getProductId() {
     return productId;
   }
 
