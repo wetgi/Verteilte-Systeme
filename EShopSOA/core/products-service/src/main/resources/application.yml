@@ -7,7 +7,7 @@ spring:
     database: MYSQL
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      #ddl-auto: create-drop
       dialect: org.hibernate.dialect.MySQLDialect
   datasource:
     driverClassName: com.mysql.jdbc.Driver
