@@ -28,7 +28,7 @@ public interface ProductsApi {
     }, tags={ "product", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "An array of product", response = Product.class),
-        @ApiResponse(code = 200, message = "Unexpected error", response = Product.class) })
+        @ApiResponse(code = 404, message = "Unexpected error", response = Product.class) })
     @RequestMapping(value = "/products",
         produces = { "application/json" }, 
         method = RequestMethod.GET)

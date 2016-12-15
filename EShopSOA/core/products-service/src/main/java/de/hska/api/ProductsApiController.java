@@ -1,6 +1,5 @@
 package de.hska.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +21,23 @@ import io.swagger.annotations.ApiParam;
 public class ProductsApiController implements ProductsApi {
 
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductRepository pr;
 
 	public ResponseEntity<List<Product>> productsGet(
 			@ApiParam(value = "Is contained in product name?") @RequestParam(value = "searchString", required = false) String searchString,
 			@ApiParam(value = "Does product cost at least x?") @RequestParam(value = "minPrice", required = false) Double minPrice,
 			@ApiParam(value = "Does product cost at max x?") @RequestParam(value = "maxPrice", required = false) Double maxPrice) {
-		List<Product> list = new ArrayList<>();
-		productRepository.findAll().forEach(list::add);
-		return new ResponseEntity<List<Product>>(list, HttpStatus.OK);
+		if (searchString == null) {
+			searchString = "";
+		}
+		if (minPrice == null) {
+			minPrice = Double.MIN_VALUE;
+		}
+		if (maxPrice == null) {
+			maxPrice = Double.MAX_VALUE;
+		}
+		List<Product> products = pr.findByNameContainingAndPriceBetween(searchString, minPrice, maxPrice);
+		return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
 	}
 
 	public ResponseEntity<Product> productsPost(
@@ -38,7 +45,8 @@ public class ProductsApiController implements ProductsApi {
 			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
 		// !TODO check if user is eligible
 		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
-		productRepository.save(newProduct);
+		// !TODO check if new product is valid?
+		pr.save(newProduct);
 		return new ResponseEntity<Product>(HttpStatus.OK);
 	}
 
@@ -47,9 +55,8 @@ public class ProductsApiController implements ProductsApi {
 			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
 		// !TODO check if user is eligible
 		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
-		Product product = productRepository.findOne(productId);
-		if (product != null) {
-			productRepository.delete(productId);
+		if (pr.exists(productId)) {
+			pr.delete(productId);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -57,7 +64,7 @@ public class ProductsApiController implements ProductsApi {
 
 	public ResponseEntity<Product> productsProductIdGet(
 			@ApiParam(value = "Get details for product", required = true) @PathVariable("productId") Integer productId) {
-		Product product = productRepository.findOne(productId);
+		Product product = pr.findOne(productId);
 		if (product != null) {
 			return new ResponseEntity<Product>(product, HttpStatus.OK);
 		}

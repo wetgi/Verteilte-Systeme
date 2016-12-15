@@ -17,7 +17,7 @@ public class Product   {
   @JsonProperty("productId")
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
-  private int productId;
+  private Integer productId = null;
 
   @JsonProperty("details")
   private String details = null;
