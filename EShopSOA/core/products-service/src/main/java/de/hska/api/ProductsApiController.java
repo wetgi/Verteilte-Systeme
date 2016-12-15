@@ -37,6 +37,7 @@ public class ProductsApiController implements ProductsApi {
 			@ApiParam(value = "Information about the new product.", required = true) @RequestBody Product newProduct,
 			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
 		// !TODO check if user is eligible
+		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
 		productRepository.save(newProduct);
 		return new ResponseEntity<Product>(HttpStatus.OK);
 	}
@@ -44,14 +45,23 @@ public class ProductsApiController implements ProductsApi {
 	public ResponseEntity<Void> productsProductIdDelete(
 			@ApiParam(value = "Deletes a product", required = true) @PathVariable("productId") Integer productId,
 			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
-		// do some magic!
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		// !TODO check if user is eligible
+		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
+		Product product = productRepository.findOne(productId);
+		if (product != null) {
+			productRepository.delete(productId);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 
 	public ResponseEntity<Product> productsProductIdGet(
 			@ApiParam(value = "Get details for product", required = true) @PathVariable("productId") Integer productId) {
-		// do some magic!
-		return new ResponseEntity<Product>(HttpStatus.OK);
+		Product product = productRepository.findOne(productId);
+		if (product != null) {
+			return new ResponseEntity<Product>(product, HttpStatus.OK);
+		}
+		return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 	}
 
 }
