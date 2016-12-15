@@ -3,6 +3,17 @@ server:
 spring:
   application:
     name: product-service
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+      dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eshopSOA
+    username: root
+    password: root
 eureka:
   client:
     serviceUrl:
