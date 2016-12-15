@@ -23,16 +23,8 @@ public class CategoriesApiController implements CategoriesApi {
 	@Autowired
 	private CategoryRepository cr;
 
-	public ResponseEntity<Void> categoriesCategoryIdDelete(
-			@ApiParam(value = "Deletes a category", required = true) @PathVariable("categoryId") Integer categoryId,
-			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
-		// !TODO check if user is eligible
-		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
-		if (cr.exists(categoryId)) {
-			cr.delete(categoryId);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		}
-		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<List<Category>> categoriesGet() {
+		return new ResponseEntity<List<Category>>(Lists.newArrayList(cr.findAll()), HttpStatus.OK);
 	}
 
 	public ResponseEntity<Category> categoriesCategoryIdGet(
@@ -42,10 +34,6 @@ public class CategoriesApiController implements CategoriesApi {
 			return new ResponseEntity<Category>(category, HttpStatus.OK);
 		}
 		return new ResponseEntity<Category>(HttpStatus.NOT_FOUND);
-	}
-
-	public ResponseEntity<List<Category>> categoriesGet() {
-		return new ResponseEntity<List<Category>>(Lists.newArrayList(cr.findAll()), HttpStatus.OK);
 	}
 
 	public ResponseEntity<Category> categoriesPost(
@@ -58,4 +46,15 @@ public class CategoriesApiController implements CategoriesApi {
 		return new ResponseEntity<Category>(HttpStatus.OK);
 	}
 
+	public ResponseEntity<Void> categoriesCategoryIdDelete(
+			@ApiParam(value = "Deletes a category", required = true) @PathVariable("categoryId") Integer categoryId,
+			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
+		// !TODO check if user is eligible
+		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
+		if (cr.exists(categoryId)) {
+			cr.delete(categoryId);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
 }

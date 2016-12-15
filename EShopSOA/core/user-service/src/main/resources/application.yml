@@ -1,0 +1,25 @@
+server:
+  port: 8092
+spring:
+  application:
+    name: user-service
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      #ddl-auto: create-drop
+      dialect: org.hibernate.dialect.MySQLDialect
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eshop
+    username: root
+    password: test
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+    metadataMap:
+      instanceId: "${spring.application.name}:${random.value}"

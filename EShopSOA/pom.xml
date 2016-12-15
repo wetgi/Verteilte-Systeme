@@ -22,6 +22,7 @@
 		<module>support/edge-server</module>
 		<module>composite/product-category-service</module>
 		<module>core/products-service</module>
+		<module>core/user-service</module>
 	</modules>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
