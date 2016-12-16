@@ -36,7 +36,7 @@ public class Product   {
    * @return productId
   **/
   @ApiModelProperty(value = "Unique identifier of the product.")
-  public int getProductId() {
+  public Integer getProductId() {
     return productId;
   }
 
