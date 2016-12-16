@@ -5,3 +5,8 @@ eureka:
     leaseRenewalIntervalInSeconds: 10
     statusPageUrlPath: /info
     healthCheckUrlPath: /health
+    
+zuul:
+  ignored-services: '*'
+  routes:
+    product-category-service: /product-api/**
