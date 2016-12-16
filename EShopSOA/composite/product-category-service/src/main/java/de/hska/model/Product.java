@@ -16,7 +16,7 @@ public class Product {
 
 	private Integer categoryId = null;
 
-	public int getProductId() {
+	public Integer getProductId() {
 		return productId;
 	}
 
