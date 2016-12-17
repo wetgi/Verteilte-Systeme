@@ -16,3 +16,4 @@
 **Composite:**
 
   - Product-Category Service
+  - User-Proxy Service
