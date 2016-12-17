@@ -21,6 +21,7 @@
 		<module>support/discovery-server</module>
 		<module>support/edge-server</module>
 		<module>composite/product-category-service</module>
+		<module>composite/user-proxy-service</module>
 		<module>core/products-service</module>
 		<module>core/user-service</module>
 	</modules>
