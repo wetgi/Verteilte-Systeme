@@ -6,6 +6,7 @@
 
  - Product Service
  - Category Service
+ - User Service
 
 **Support:**
 
