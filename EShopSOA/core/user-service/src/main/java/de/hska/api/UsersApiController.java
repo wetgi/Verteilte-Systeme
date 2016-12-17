@@ -48,4 +48,12 @@ public class UsersApiController implements UsersApi {
 		return new ResponseEntity<User>(HttpStatus.METHOD_NOT_ALLOWED);
 	}
 
+	public ResponseEntity<User> userLoginDataValid(
+			@ApiParam(value = "Information about the user.", required = true) @RequestBody User user) {
+		User foundUser = ur.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		if (foundUser != null) {
+			return new ResponseEntity<User>(foundUser, HttpStatus.OK);
+		}
+		return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+	}
 }

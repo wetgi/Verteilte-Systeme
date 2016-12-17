@@ -1,5 +1,6 @@
 package de.hska.client;
 
+import java.net.URI;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
@@ -44,6 +46,15 @@ public class UserClient {
 		return tmpUser;
 	}
 
+	@HystrixCommand(fallbackMethod = "userLoginFromCache", commandProperties = {
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+	public User userLogin(User user) {
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://user-service/users/login");
+
+		User tmpUser = restTemplate.postForObject(builder.build().encode().toUri(), user, User.class);
+		return tmpUser;
+	}
+
 	public Iterable<User> getUsersCache() {
 		return userCache.values();
 	}
@@ -52,9 +63,15 @@ public class UserClient {
 		return userCache.getOrDefault(userId, new User());
 	}
 
+	public User userLoginFromCache(User user) {
+		// !TODO get corresponding user
+		return null;
+	}
+
 	@LoadBalanced
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
+
 }
