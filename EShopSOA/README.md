@@ -11,7 +11,7 @@
 **Support:**
 
    - Discovery Server
-   - Edeg Server
+   - Edge Server
 
 **Composite:**
 
