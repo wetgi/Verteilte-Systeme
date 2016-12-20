@@ -1,6 +1,5 @@
 package de.hska.client;
 
-import java.net.URI;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -55,6 +54,14 @@ public class UserClient {
 		return tmpUser;
 	}
 
+	@HystrixCommand(fallbackMethod = "userIsAdminFromCache", commandProperties = {
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+	public boolean userIsAdmin(Integer userId) {
+		boolean isAdmin = restTemplate.getForObject("http://user-service/users/isadmin/" + userId.toString(),
+				Boolean.class);
+		return isAdmin;
+	}
+
 	public Iterable<User> getUsersCache() {
 		return userCache.values();
 	}
@@ -66,6 +73,11 @@ public class UserClient {
 	public User userLoginFromCache(User user) {
 		// !TODO get corresponding user
 		return null;
+	}
+
+	public boolean userIsAdminFromCache(Integer id) {
+		// !TODO check if user is admin
+		return false;
 	}
 
 	@LoadBalanced

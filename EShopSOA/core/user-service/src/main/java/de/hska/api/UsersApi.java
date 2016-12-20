@@ -49,5 +49,11 @@ public interface UsersApi {
 	@RequestMapping(value = "/users/login", produces = { "application/json" }, method = RequestMethod.POST)
 	ResponseEntity<User> userLoginDataValid(
 			@ApiParam(value = "Information about the user.", required = true) @RequestBody User user);
-	
+
+	@ApiOperation(value = "Check if requesting user is admin", notes = "", response = Boolean.class, tags = { "user", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Admin", response = Boolean.class),
+			@ApiResponse(code = 204, message = "No admin", response = Boolean.class) })
+	@RequestMapping(value = "/users/isadmin/{userId}", produces = { "application/json" }, method = RequestMethod.GET)
+	ResponseEntity<Boolean> userIsAdmin(
+			@ApiParam(value = "Id of the requesting user.", required = true) @PathVariable("userId") Integer userId);
 }

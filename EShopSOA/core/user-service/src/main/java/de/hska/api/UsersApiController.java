@@ -19,6 +19,8 @@ import io.swagger.annotations.ApiParam;
 
 @Controller
 public class UsersApiController implements UsersApi {
+	private static int ADMIN_ROLE = 1;
+
 	@Autowired
 	private UserRepository ur;
 
@@ -55,5 +57,14 @@ public class UsersApiController implements UsersApi {
 			return new ResponseEntity<User>(foundUser, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+	}
+
+	public ResponseEntity<Boolean> userIsAdmin(
+			@ApiParam(value = "Id of the requesting user.", required = true) @PathVariable("userId") Integer userId) {
+		if (ur.exists(userId)) {
+			User user = ur.findOne(userId);
+			return new ResponseEntity<>(user.getRole() == ADMIN_ROLE, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(false, HttpStatus.NO_CONTENT);
 	}
 }

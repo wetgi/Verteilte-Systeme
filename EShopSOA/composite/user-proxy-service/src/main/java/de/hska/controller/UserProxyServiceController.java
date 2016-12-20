@@ -39,4 +39,11 @@ public class UserProxyServiceController {
 		}
 		return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 	}
+
+	@RequestMapping(value = "/users/isadmin/{userId}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> userIsAdmin(
+			@ApiParam(value = "Id of the requesting user.", required = true) @PathVariable Integer userId) {
+		boolean isAdmin = userClient.userIsAdmin(userId);
+		return new ResponseEntity<>(isAdmin, HttpStatus.OK);
+	}
 }
