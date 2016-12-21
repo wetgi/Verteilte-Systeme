@@ -15,6 +15,8 @@ public class Product {
 	private Double price = null;
 
 	private Integer categoryId = null;
+	
+	private String categoryName = null;
 
 	public Integer getProductId() {
 		return productId;
@@ -71,7 +73,17 @@ public class Product {
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
+	
 
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {

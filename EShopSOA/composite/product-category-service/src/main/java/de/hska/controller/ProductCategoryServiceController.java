@@ -5,12 +5,15 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.hska.client.ProductClient;
+import de.hska.model.Category;
 import de.hska.model.Product;
 import io.swagger.annotations.ApiParam;
 
@@ -33,4 +36,48 @@ public class ProductCategoryServiceController {
 	public ResponseEntity<Product> getProduct(@PathVariable Integer productId) {
 		return new ResponseEntity<>(productClient.getProduct(productId), HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/categories", method = RequestMethod.GET)
+	public ResponseEntity<Iterable<Category>> getCategories() {
+		return new ResponseEntity<Iterable<Category>>(productClient.getCategories(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/categories/{categoryId}", method = RequestMethod.GET)
+	public ResponseEntity<Category> getCategory(@PathVariable Integer categoryId) {
+		return new ResponseEntity<>(productClient.getCategory(categoryId), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/products/{productId}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteProduct(@RequestHeader(value = "userId", required = true) String userId,
+			@PathVariable Integer productId) {
+		return productClient.deleteProduct(userId, productId);
+	}
+
+	@RequestMapping(value = "/categories/{categoryId}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteCategory(@RequestHeader(value = "userId", required = true) String userId,
+			@PathVariable Integer categoryId) {
+		// !TODO faster way to get all products with given category?
+		Iterable<Product> products = productClient.getProducts(null, null, null);
+
+		for (Product product : products) {
+			if (product.getCategoryId().equals(categoryId)) {
+				return new ResponseEntity<>(HttpStatus.CONFLICT);
+			}
+		}
+
+		return productClient.deleteCategory(userId, categoryId);
+	}
+
+	@RequestMapping(value = "/categories", method = RequestMethod.POST, produces = { "application/json" })
+	public ResponseEntity<Category> createCategory(@RequestHeader(value = "userId", required = true) String userId,
+			@RequestBody Category category) {
+		return new ResponseEntity<Category>(productClient.createCategory(userId, category), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/products", method = RequestMethod.POST)
+	public ResponseEntity<Product> createProduct(@RequestHeader(value = "userId", required = true) String userId,
+			@RequestBody Product product) {
+		return new ResponseEntity<>(productClient.createProduct(userId, product), HttpStatus.OK);
+	}
+
 }
