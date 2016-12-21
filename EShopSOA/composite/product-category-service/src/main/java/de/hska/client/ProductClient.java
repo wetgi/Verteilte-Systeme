@@ -11,10 +11,12 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -104,9 +106,11 @@ public class ProductClient {
 	@HystrixCommand(fallbackMethod = "getCachedCategory", commandProperties = {
 			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public Category getCategory(Integer categoryId) {
-		// !TODO returned {"categoryId":null,"name":null} if category doesn't exists
-		Category category = restTemplate.getForObject("http://category-service/categories/" + categoryId,
-				Category.class);
+		Category category = restTemplate.getForObject("http://category-service/categories/{categoryId}", Category.class,
+				categoryId);
+		if (category == null) {
+			return new Category();
+		}
 		return category;
 	}
 
@@ -118,8 +122,8 @@ public class ProductClient {
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
 		headers.add("userId", userId);
 		HttpEntity<?> request = new HttpEntity<Object>(headers);
-		return restTemplate.exchange("http://product-service/products/{productId}", HttpMethod.DELETE, request, Void.class,
-				productId);
+		return restTemplate.exchange("http://product-service/products/{productId}", HttpMethod.DELETE, request,
+				Void.class, productId);
 	}
 
 	public ResponseEntity<Void> deleteCategory(String userId, Integer categoryId) {
@@ -149,6 +153,12 @@ public class ProductClient {
 	@LoadBalanced
 	@Bean
 	public RestTemplate restTemplate() {
-		return new RestTemplate();
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
+			protected boolean hasError(HttpStatus statusCode) {
+				return false;
+			}
+		});
+		return restTemplate;
 	}
 }

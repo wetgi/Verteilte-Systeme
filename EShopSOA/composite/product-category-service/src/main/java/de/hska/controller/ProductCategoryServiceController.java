@@ -44,7 +44,9 @@ public class ProductCategoryServiceController {
 
 	@RequestMapping(value = "/categories/{categoryId}", method = RequestMethod.GET)
 	public ResponseEntity<Category> getCategory(@PathVariable Integer categoryId) {
-		return new ResponseEntity<>(productClient.getCategory(categoryId), HttpStatus.OK);
+		Category category = productClient.getCategory(categoryId);
+		return category.getCategoryId() != null ? new ResponseEntity<>(category, HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.DELETE)

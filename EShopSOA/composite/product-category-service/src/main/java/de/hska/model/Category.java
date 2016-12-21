@@ -18,11 +18,6 @@ public class Category {
 		this.categoryId = categoryId;
 	}
 
-	public Category name(String name) {
-		this.name = name;
-		return this;
-	}
-
 	public String getName() {
 		return name;
 	}
