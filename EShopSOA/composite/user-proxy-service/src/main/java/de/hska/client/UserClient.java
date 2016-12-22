@@ -54,6 +54,15 @@ public class UserClient {
 		return tmpUser;
 	}
 
+	@HystrixCommand(fallbackMethod = "userCreateFromCache", commandProperties = {
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+	public User userCreate(User user) {
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://user-service/users");
+
+		User tmpUser = restTemplate.postForObject(builder.build().encode().toUri(), user, User.class);
+		return tmpUser;
+	}
+
 	@HystrixCommand(fallbackMethod = "userIsAdminFromCache", commandProperties = {
 			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public boolean userIsAdmin(Integer userId) {
@@ -78,6 +87,11 @@ public class UserClient {
 	public boolean userIsAdminFromCache(Integer id) {
 		// !TODO check if user is admin
 		return false;
+	}
+
+	public User userCreateFromCache(User user) {
+		// !TODO
+		return null;
 	}
 
 	@LoadBalanced
