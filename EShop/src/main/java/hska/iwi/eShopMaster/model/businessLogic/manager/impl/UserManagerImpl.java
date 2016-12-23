@@ -20,10 +20,15 @@ public class UserManagerImpl implements UserManager {
 
 	
 	public void registerUser(String username, String name, String lastname, String password, Role role) {
+		User user = new User();
+		user.setFirstname(name);
+		user.setName(lastname);
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setRole(role);
+		user.setLevel(role.getLevel());
 
-//		User user = new User(username, name, lastname, password, role);
-//
-//		helper.saveObject(user);
+		helper.saveUser(user);
 	}
 
 	
