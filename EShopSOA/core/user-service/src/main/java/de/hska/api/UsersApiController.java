@@ -67,4 +67,14 @@ public class UsersApiController implements UsersApi {
 		}
 		return new ResponseEntity<>(false, HttpStatus.NO_CONTENT);
 	}
+
+	public ResponseEntity<User> usersUserUsernameGet(
+			@ApiParam(value = "Get details for user", required = true) @PathVariable("username") String username) {
+		User user = ur.findByUsername(username);
+		if (user != null) {
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		}
+		return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+	}
+
 }

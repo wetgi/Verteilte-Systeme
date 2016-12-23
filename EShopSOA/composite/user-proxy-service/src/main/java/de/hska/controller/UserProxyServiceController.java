@@ -36,6 +36,11 @@ public class UserProxyServiceController {
 		return new ResponseEntity<>(userClient.getUser(userId), HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/users/names/{username}", method = RequestMethod.GET)
+	public ResponseEntity<User> getUser(@PathVariable String username) {
+		return new ResponseEntity<>(userClient.getUserByUsername(username), HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/users/login", method = RequestMethod.POST)
 	public ResponseEntity<User> userLogin(
 			@ApiParam(value = "Information about the user.", required = true) @RequestBody User user) {

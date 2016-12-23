@@ -39,6 +39,14 @@ public interface UsersApi {
 			@Authorization(value = "UserSecurity") }, tags = { "user", })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Returns the user", response = User.class),
 			@ApiResponse(code = 404, message = "User not found", response = User.class) })
+	@RequestMapping(value = "/users/names/{username}", produces = { "application/json" }, method = RequestMethod.GET)
+	ResponseEntity<User> usersUserUsernameGet(
+			@ApiParam(value = "Get details for user", required = true) @PathVariable("username") String username);
+	
+	@ApiOperation(value = "Get details for a certain user.", notes = "", response = User.class, authorizations = {
+			@Authorization(value = "UserSecurity") }, tags = { "user", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Returns the user", response = User.class),
+			@ApiResponse(code = 404, message = "User not found", response = User.class) })
 	@RequestMapping(value = "/users/{userId}", produces = { "application/json" }, method = RequestMethod.GET)
 	ResponseEntity<User> usersUserIdGet(
 			@ApiParam(value = "Get details for user", required = true) @PathVariable("userId") Integer userId);

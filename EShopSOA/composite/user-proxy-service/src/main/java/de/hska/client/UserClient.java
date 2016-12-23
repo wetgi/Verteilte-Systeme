@@ -71,12 +71,24 @@ public class UserClient {
 		return isAdmin;
 	}
 
+	@HystrixCommand(fallbackMethod = "getUserCache", commandProperties = {
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+	public User getUserByUsername(String username) {
+		User tmpUser = restTemplate.getForObject("http://user-service/users/names/" + username, User.class);
+		// userCache.putIfAbsent(tempu, tmpUser);
+		return tmpUser;
+	}
+
 	public Iterable<User> getUsersCache() {
 		return userCache.values();
 	}
 
 	public User getUserCache(Integer userId) {
 		return userCache.getOrDefault(userId, new User());
+	}
+
+	public User getUserCache(String username) {
+		return null;
 	}
 
 	public User userLoginFromCache(User user) {
