@@ -28,18 +28,18 @@ public class DeleteCategoryAction extends ActionSupport {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("webshop_user");
 		
-		if(user != null && (user.getRole().getTyp().equals("admin"))) {
-
-			// Helper inserts new Category in DB:
-			CategoryManager categoryManager = new CategoryManagerImpl();
-		
-			categoryManager.delCategoryById(catId);
-
-			categories = categoryManager.getCategories();
-				
-			res = "success";
-
-		}
+//		if(user != null && (user.getRole().getTyp().equals("admin"))) {
+//
+//			// Helper inserts new Category in DB:
+//			CategoryManager categoryManager = new CategoryManagerImpl();
+//		
+//			categoryManager.delCategoryById(catId);
+//
+//			categories = categoryManager.getCategories();
+//				
+//			res = "success";
+//
+//		}
 		
 		return res;
 		

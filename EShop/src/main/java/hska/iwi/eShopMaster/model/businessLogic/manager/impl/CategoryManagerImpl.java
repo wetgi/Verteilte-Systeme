@@ -1,45 +1,47 @@
 package hska.iwi.eShopMaster.model.businessLogic.manager.impl;
 
-
 import hska.iwi.eShopMaster.model.businessLogic.manager.CategoryManager;
 import hska.iwi.eShopMaster.model.database.dataAccessObjects.CategoryDAO;
 import hska.iwi.eShopMaster.model.database.dataobjects.Category;
 
 import java.util.List;
 
-public class CategoryManagerImpl implements CategoryManager{
+public class CategoryManagerImpl implements CategoryManager {
 	private CategoryDAO helper;
-	
+
 	public CategoryManagerImpl() {
 		helper = new CategoryDAO();
 	}
 
 	public List<Category> getCategories() {
-		return helper.getObjectList();
+		// return helper.getObjectList();
+		return null;
 	}
 
 	public Category getCategory(int id) {
-		return helper.getObjectById(id);
+		// return helper.getObjectById(id);
+		return null;
 	}
 
 	public Category getCategoryByName(String name) {
-		return helper.getObjectByName(name);
+		// return helper.getObjectByName(name);
+		return null;
 	}
 
 	public void addCategory(String name) {
-		Category cat = new Category(name);
-		helper.saveObject(cat);
+		// Category cat = new Category(name);
+		// helper.saveObject(cat);
 
 	}
 
 	public void delCategory(Category cat) {
-	
-// 		Products are also deleted because of relation in Category.java 
-		helper.deleteById(cat.getId());
+
+		// Products are also deleted because of relation in Category.java
+		// helper.deleteById(cat.getId());
 	}
 
 	public void delCategoryById(int id) {
-		
-		helper.deleteById(id);
+
+		// helper.deleteById(id);
 	}
 }

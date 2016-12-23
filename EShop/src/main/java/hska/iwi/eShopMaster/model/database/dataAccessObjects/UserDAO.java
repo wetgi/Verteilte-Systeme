@@ -1,41 +1,24 @@
 package hska.iwi.eShopMaster.model.database.dataAccessObjects;
 
-import java.util.List;
+import javax.ws.rs.core.Response;
 
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
-import hska.iwi.eShopMaster.model.database.GenericHibernateDAO;
+import hska.iwi.eShopMaster.model.database.dataAccessObjects.util.RestConnectionHelper;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
-import hska.iwi.eShopMaster.model.sessionFactory.util.HibernateUtil;
 
-public class UserDAO extends GenericHibernateDAO<User, Integer> {
-	
+public class UserDAO {
+
 	public User getUserByUsername(String name) {
-	    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try
-		{
-			User user = null;
-			session.beginTransaction();
-            Criteria crit = session.createCriteria(User.class);
-            crit.add(Restrictions.eq("username",name));
-            List<User> resultList = crit.list();
-            if (resultList.size() > 0) {
-            	user = (User) crit.list().get(0);
-            }
-            session.getTransaction().commit();
-            return user;
+		User user = null;
+		Response response = RestConnectionHelper.getResponseForURL("http://localhost:8081/user-api/users/names/" + name);
+		if (response.getStatus() == 200) {
+			user = response.readEntity(User.class);
 		}
-		catch (HibernateException e)
-		{
-			System.out.println("Hibernate Exception" + e.getMessage());
-			session.getTransaction().rollback();
-			throw new RuntimeException(e);
-		}
+		System.out.println(user.getPassword());
+		return user;
 	}
 
+	public void saveObject(User user) {
+		// TODO Auto-generated method stub
 
-
+	}
 }

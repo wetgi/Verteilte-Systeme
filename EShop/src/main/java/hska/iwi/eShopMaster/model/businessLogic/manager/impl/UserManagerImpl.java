@@ -21,9 +21,9 @@ public class UserManagerImpl implements UserManager {
 	
 	public void registerUser(String username, String name, String lastname, String password, Role role) {
 
-		User user = new User(username, name, lastname, password, role);
-
-		helper.saveObject(user);
+//		User user = new User(username, name, lastname, password, role);
+//
+//		helper.saveObject(user);
 	}
 
 	
@@ -36,8 +36,8 @@ public class UserManagerImpl implements UserManager {
 
 	public boolean deleteUserById(int id) {
 		User user = new User();
-		user.setId(id);
-		helper.deleteObject(user);
+//		user.setId(id);
+//		helper.deleteObject(user);
 		return true;
 	}
 
@@ -60,7 +60,7 @@ public class UserManagerImpl implements UserManager {
 	
 
 	public boolean validate(User user) {
-		if (user.getFirstname().isEmpty() || user.getPassword().isEmpty() || user.getRole() == null || user.getLastname() == null || user.getUsername() == null) {
+		if (user.getFirstname().isEmpty() || user.getPassword().isEmpty() || user.getRole() == null || user.getName() == null || user.getUsername() == null) {
 			return false;
 		}
 		

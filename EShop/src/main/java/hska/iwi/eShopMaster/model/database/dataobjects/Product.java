@@ -1,99 +1,130 @@
 package hska.iwi.eShopMaster.model.database.dataobjects;
 
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.Objects;
 
 /**
- * This class contains details about products.
+ * Product
  */
-@Entity
-@Table(name = "product")
-public class Product implements java.io.Serializable {
+public class Product {
+	private Integer productId = null;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private String details = null;
 
-	@Id
-	@GeneratedValue
-	@Column(name = "id", nullable = false)
-	private int id;
+	private String name = null;
 
-	@Column(name = "name")
-	private String name;
+	private Double price = null;
 
-	@Column(name = "price")
-	private double price;
-
+	private Integer categoryId = null;
 	
-	@ManyToOne
-	@JoinColumn(name = "category_id")
-	private Category category;
+	private String categoryName = null;
 
-	@Column(name = "details")
-	private String details;
-
-	public Product() {
+	public Integer getProductId() {
+		return productId;
 	}
 
-	public Product(String name, double price, Category category) {
-		this.name = name;
-		this.price = price;
-		this.category = category;
-	}
-
-	public Product(String name, double price, Category category, String details) {
-		this.name = name;
-		this.price = price;
-		this.category = category;
+	public Product details(String details) {
 		this.details = details;
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getPrice() {
-		return this.price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public Category getCategory() {
-		return this.category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
+		return this;
 	}
 
 	public String getDetails() {
-		return this.details;
+		return details;
 	}
 
 	public void setDetails(String details) {
 		this.details = details;
 	}
 
+	public Product name(String name) {
+		this.name = name;
+		return this;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Product price(Double price) {
+		this.price = price;
+		return this;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Product categoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+		return this;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+	
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Product product = (Product) o;
+		return Objects.equals(this.productId, product.productId) && Objects.equals(this.details, product.details)
+				&& Objects.equals(this.name, product.name) && Objects.equals(this.price, product.price)
+				&& Objects.equals(this.categoryId, product.categoryId);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(productId, details, name, price, categoryId);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class Product {\n");
+
+		sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
+		sb.append("    details: ").append(toIndentedString(details)).append("\n");
+		sb.append("    name: ").append(toIndentedString(name)).append("\n");
+		sb.append("    price: ").append(toIndentedString(price)).append("\n");
+		sb.append("    categoryId: ").append(toIndentedString(categoryId)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

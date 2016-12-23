@@ -1,110 +1,140 @@
 package hska.iwi.eShopMaster.model.database.dataobjects;
 
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.Objects;
 
 /**
- * This class contains the users of the webshop.
+ * User
  */
-@Entity
-@Table(name = "Customer")
-public class User implements java.io.Serializable {
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-12-08T10:50:15.291Z")
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class User {
+	private Integer userId = null;
 
+	private String firstname = null;
 
-	@Id
-	@GeneratedValue
-	@Column(name = "id", nullable = false)
-	private int id;
+	private String name = null;
 
-	
-	@Column(name = "username", unique = true, nullable = false)
-	private String username;
+	private String username = null;
 
-	
-	@Column(name = "name", nullable = false)
-	private String firstname;
+	private String password = null;
 
-	
-	@Column(name = "lastname", nullable = false)
-	private String lastname;
+	private Integer role = null;
 
-	
-	@Column(name = "password", nullable = false)
-	private String password;
-
-	@ManyToOne()
-	@JoinColumn(name = "role", nullable = false)	
-	private Role role;
-
-	public User() {
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public User(String username, String firstname, String lastname,
-			String password, Role role) {
-		this.username = username;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public User firstname(String firstname) {
 		this.firstname = firstname;
-		this.lastname = lastname;
-		this.password = password;
-		this.role = role;
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+		return this;
 	}
 
 	public String getFirstname() {
-		return this.firstname;
+		return firstname;
 	}
 
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
 
-	public String getLastname() {
-		return this.lastname;
+	public User name(String name) {
+		this.name = name;
+		return this;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public User username(String username) {
+		this.username = username;
+		return this;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public User password(String password) {
+		this.password = password;
+		return this;
 	}
 
 	public String getPassword() {
-		return this.password;
+		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return this.role;
+	public User role(Integer role) {
+		this.role = role;
+		return this;
 	}
 
-	public void setRole(Role role) {
+	public Integer getRole() {
+		return role;
+	}
+
+	public void setRole(Integer role) {
 		this.role = role;
 	}
 
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		User user = (User) o;
+		return Objects.equals(this.userId, user.userId) && Objects.equals(this.firstname, user.firstname)
+				&& Objects.equals(this.name, user.name) && Objects.equals(this.username, user.username)
+				&& Objects.equals(this.password, user.password) && Objects.equals(this.role, user.role);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(userId, firstname, name, username, password, role);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class User {\n");
+
+		sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+		sb.append("    firstname: ").append(toIndentedString(firstname)).append("\n");
+		sb.append("    name: ").append(toIndentedString(name)).append("\n");
+		sb.append("    username: ").append(toIndentedString(username)).append("\n");
+		sb.append("    password: ").append(toIndentedString(password)).append("\n");
+		sb.append("    role: ").append(toIndentedString(role)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

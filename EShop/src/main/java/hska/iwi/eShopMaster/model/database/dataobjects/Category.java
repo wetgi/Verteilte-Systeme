@@ -1,71 +1,67 @@
 package hska.iwi.eShopMaster.model.database.dataobjects;
 
-
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.Objects;
 
 /**
- * This class contains details about categories.
+ * Category
  */
-@Entity
-@Table(name = "category")
-public class Category implements java.io.Serializable {
+public class Category {
+	private Integer categoryId = null;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private int id;
-	private String name;
-	private Set<Product> products = new HashSet<Product>(0);
+	private String name = null;
 
-	public Category() {
+	public Integer getCategoryId() {
+		return categoryId;
 	}
 
-	public Category(String name) {
-		this.name = name;
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public Category(String name, Set<Product> products) {
-		this.name = name;
-		this.products = products;
-	}
-
-	@Id
-	@GeneratedValue
-	@Column(name = "id", nullable = false)
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	@Column(name = "name", nullable = false)
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-	public Set<Product> getProducts() {
-		return this.products;
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Category category = (Category) o;
+		return Objects.equals(this.categoryId, category.categoryId) && Objects.equals(this.name, category.name);
 	}
 
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	@Override
+	public int hashCode() {
+		return Objects.hash(categoryId, name);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class Category {\n");
+
+		sb.append("    categoryId: ").append(toIndentedString(categoryId)).append("\n");
+		sb.append("    name: ").append(toIndentedString(name)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
