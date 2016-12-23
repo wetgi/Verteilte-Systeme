@@ -30,4 +30,9 @@ public class RestConnectionHelper {
 		return request;
 	}
 
+	public static Response deleteResponseForURL(String url, User user) {
+		Builder request = getNewRequestBuilderForURL(url);
+		return request.delete();
+	}
+
 }

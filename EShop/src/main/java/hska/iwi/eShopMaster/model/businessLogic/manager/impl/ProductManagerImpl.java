@@ -16,8 +16,7 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	public List<Product> getProducts() {
-		// return helper.getObjectList();
-		return null;
+		 return helper.getProducts();
 	}
 
 	public List<Product> getProductsForSearchValues(String searchDescription, Double searchMinPrice,

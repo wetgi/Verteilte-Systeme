@@ -41,9 +41,9 @@ public class UserManagerImpl implements UserManager {
 
 	public boolean deleteUserById(int id) {
 		User user = new User();
-//		user.setId(id);
-//		helper.deleteObject(user);
-		return true;
+		user.setUserId(id);
+		helper.deleteUser(user);
+		return false;
 	}
 
 	public Role getRoleByLevel(int level) {
