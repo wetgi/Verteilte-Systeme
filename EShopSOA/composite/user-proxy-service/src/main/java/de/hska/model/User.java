@@ -18,7 +18,9 @@ public class User {
 
 	private String password = null;
 
-	private Integer role = null;
+	private Role role = null;
+
+	private Integer level = null;
 
 	public Integer getUserId() {
 		return userId;
@@ -80,17 +82,30 @@ public class User {
 		this.password = password;
 	}
 
-	public User role(Integer role) {
+	public Role role(Role role) {
 		this.role = role;
-		return this;
-	}
-
-	public Integer getRole() {
 		return role;
 	}
 
-	public void setRole(Integer role) {
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public Integer level(Integer level) {
+		this.level = level;
+		return level;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 
 	@Override

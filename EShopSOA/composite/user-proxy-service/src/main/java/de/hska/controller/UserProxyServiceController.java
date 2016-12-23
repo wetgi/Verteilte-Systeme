@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.hska.client.UserClient;
+import de.hska.model.Role;
 import de.hska.model.User;
 import io.swagger.annotations.ApiParam;
 
@@ -39,6 +40,11 @@ public class UserProxyServiceController {
 	@RequestMapping(value = "/users/names/{username}", method = RequestMethod.GET)
 	public ResponseEntity<User> getUser(@PathVariable String username) {
 		return new ResponseEntity<>(userClient.getUserByUsername(username), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/users/role/{level}", method = RequestMethod.GET)
+	public ResponseEntity<Role> getRoleByLevel(@PathVariable Integer level) {
+		return new ResponseEntity<>(userClient.getRoleByLevel(level), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/users/login", method = RequestMethod.POST)

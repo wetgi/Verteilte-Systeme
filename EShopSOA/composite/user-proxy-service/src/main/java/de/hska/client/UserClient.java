@@ -16,12 +16,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
+import de.hska.model.Role;
 import de.hska.model.User;
 
 @Component
 public class UserClient {
 
 	private final Map<Integer, User> userCache = new LinkedHashMap<Integer, User>();
+	private final Map<Integer, Role> roleCache = new LinkedHashMap<Integer, Role>();
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -75,8 +77,20 @@ public class UserClient {
 			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public User getUserByUsername(String username) {
 		User tmpUser = restTemplate.getForObject("http://user-service/users/names/" + username, User.class);
-		// userCache.putIfAbsent(tempu, tmpUser);
+		if (tmpUser != null) {
+			userCache.putIfAbsent(tmpUser.getUserId(), tmpUser);
+		}
 		return tmpUser;
+	}
+
+	@HystrixCommand(fallbackMethod = "getRoleCache", commandProperties = {
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+	public Role getRoleByLevel(Integer level) {
+		Role role = restTemplate.getForObject("http://user-service/users/role/" + level, Role.class);
+		if (role != null) {
+			roleCache.putIfAbsent(role.getId(), role);
+		}
+		return role;
 	}
 
 	public Iterable<User> getUsersCache() {
@@ -104,6 +118,10 @@ public class UserClient {
 	public User userCreateFromCache(User user) {
 		// !TODO
 		return null;
+	}
+
+	public Role getRoleCache(Integer level) {
+		return roleCache.getOrDefault(level, new Role());
 	}
 
 	@LoadBalanced

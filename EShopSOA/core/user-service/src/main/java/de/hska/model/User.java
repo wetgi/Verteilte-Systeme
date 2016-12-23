@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,177 +18,189 @@ import io.swagger.annotations.ApiModelProperty;
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-12-08T10:50:15.291Z")
 
 @Entity(name = "user")
-public class User   {
-  @JsonProperty("userId")
-  @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
-  private Integer userId = null;
+public class User {
+	@JsonProperty("userId")
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer userId = null;
 
-  @JsonProperty("firstname")
-  private String firstname = null;
+	@JsonProperty("firstname")
+	private String firstname = null;
 
-  @JsonProperty("name")
-  private String name = null;
+	@JsonProperty("name")
+	private String name = null;
 
-  @JsonProperty("username")
-  private String username = null;
+	@JsonProperty("username")
+	private String username = null;
 
-  @JsonProperty("password")
-  private String password = null;
+	@JsonProperty("password")
+	private String password = null;
 
-  @JsonProperty("role")
-  private Integer role = null;
+	@Transient 
+	@JsonProperty("role")
+	private Role role = null;
 
-   /**
-   * Id of the user.
-   * @return userId
-  **/
-  @ApiModelProperty(value = "Id of the user.")
-  public Integer getUserId() {
-    return userId;
-  }
+	@JsonProperty("level")
+	private Integer level = null;
 
-  public void setUserId(Integer userId) {
-    this.userId = userId;
-  }
+	/**
+	 * Id of the user.
+	 * 
+	 * @return userId
+	 **/
+	@ApiModelProperty(value = "Id of the user.")
+	public Integer getUserId() {
+		return userId;
+	}
 
-  public User firstname(String firstname) {
-    this.firstname = firstname;
-    return this;
-  }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-   /**
-   * First name of the user.
-   * @return firstname
-  **/
-  @ApiModelProperty(value = "First name of the user.")
-  public String getFirstname() {
-    return firstname;
-  }
+	public User firstname(String firstname) {
+		this.firstname = firstname;
+		return this;
+	}
 
-  public void setFirstname(String firstname) {
-    this.firstname = firstname;
-  }
+	/**
+	 * First name of the user.
+	 * 
+	 * @return firstname
+	 **/
+	@ApiModelProperty(value = "First name of the user.")
+	public String getFirstname() {
+		return firstname;
+	}
 
-  public User name(String name) {
-    this.name = name;
-    return this;
-  }
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
 
-   /**
-   * Last name of the user.
-   * @return name
-  **/
-  @ApiModelProperty(value = "Last name of the user.")
-  public String getName() {
-    return name;
-  }
+	public User name(String name) {
+		this.name = name;
+		return this;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	/**
+	 * Last name of the user.
+	 * 
+	 * @return name
+	 **/
+	@ApiModelProperty(value = "Last name of the user.")
+	public String getName() {
+		return name;
+	}
 
-  public User username(String username) {
-    this.username = username;
-    return this;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-   /**
-   * Username of the user.
-   * @return username
-  **/
-  @ApiModelProperty(value = "Username of the user.")
-  public String getUsername() {
-    return username;
-  }
+	public User username(String username) {
+		this.username = username;
+		return this;
+	}
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+	/**
+	 * Username of the user.
+	 * 
+	 * @return username
+	 **/
+	@ApiModelProperty(value = "Username of the user.")
+	public String getUsername() {
+		return username;
+	}
 
-  public User password(String password) {
-    this.password = password;
-    return this;
-  }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-   /**
-   * Password of the user.
-   * @return password
-  **/
-  @ApiModelProperty(value = "Password of the user.")
-  public String getPassword() {
-    return password;
-  }
+	public User password(String password) {
+		this.password = password;
+		return this;
+	}
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	/**
+	 * Password of the user.
+	 * 
+	 * @return password
+	 **/
+	@ApiModelProperty(value = "Password of the user.")
+	public String getPassword() {
+		return password;
+	}
 
-  public User role(Integer role) {
-    this.role = role;
-    return this;
-  }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-   /**
-   * The role of the user.
-   * @return role
-  **/
-  @ApiModelProperty(value = "The role of the user.")
-  public Integer getRole() {
-    return role;
-  }
+	public Role role(Role role) {
+		this.role = role;
+		return role;
+	}
 
-  public void setRole(Integer role) {
-    this.role = role;
-  }
+	public Role getRole() {
+		return role;
+	}
 
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    User user = (User) o;
-    return Objects.equals(this.userId, user.userId) &&
-        Objects.equals(this.firstname, user.firstname) &&
-        Objects.equals(this.name, user.name) &&
-        Objects.equals(this.username, user.username) &&
-        Objects.equals(this.password, user.password) &&
-        Objects.equals(this.role, user.role);
-  }
+	public Integer level(Integer level) {
+		this.level = level;
+		return level;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(userId, firstname, name, username, password, role);
-  }
+	public Integer getLevel() {
+		return level;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class User {\n");
-    
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    firstname: ").append(toIndentedString(firstname)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    username: ").append(toIndentedString(username)).append("\n");
-    sb.append("    password: ").append(toIndentedString(password)).append("\n");
-    sb.append("    role: ").append(toIndentedString(role)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		User user = (User) o;
+		return Objects.equals(this.userId, user.userId) && Objects.equals(this.firstname, user.firstname)
+				&& Objects.equals(this.name, user.name) && Objects.equals(this.username, user.username)
+				&& Objects.equals(this.password, user.password) && Objects.equals(this.role, user.role);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(userId, firstname, name, username, password, role);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class User {\n");
+
+		sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+		sb.append("    firstname: ").append(toIndentedString(firstname)).append("\n");
+		sb.append("    name: ").append(toIndentedString(name)).append("\n");
+		sb.append("    username: ").append(toIndentedString(username)).append("\n");
+		sb.append("    password: ").append(toIndentedString(password)).append("\n");
+		sb.append("    role: ").append(toIndentedString(role)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
-

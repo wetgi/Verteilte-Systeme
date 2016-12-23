@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import de.hska.model.Role;
 import de.hska.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,6 +43,14 @@ public interface UsersApi {
 	@RequestMapping(value = "/users/names/{username}", produces = { "application/json" }, method = RequestMethod.GET)
 	ResponseEntity<User> usersUserUsernameGet(
 			@ApiParam(value = "Get details for user", required = true) @PathVariable("username") String username);
+	
+	@ApiOperation(value = "Get role information by level", notes = "", response = Role.class, authorizations = {
+			@Authorization(value = "UserSecurity") }, tags = { "user", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Returns the role", response = Role.class),
+			@ApiResponse(code = 404, message = "Role not found", response = Role.class) })
+	@RequestMapping(value = "/users/role/{level}", produces = { "application/json" }, method = RequestMethod.GET)
+	ResponseEntity<Role> usersUserRoleGet(
+			@ApiParam(value = "Level of role", required = true) @PathVariable("level") Integer level);
 	
 	@ApiOperation(value = "Get details for a certain user.", notes = "", response = User.class, authorizations = {
 			@Authorization(value = "UserSecurity") }, tags = { "user", })

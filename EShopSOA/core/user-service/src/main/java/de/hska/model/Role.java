@@ -1,14 +1,23 @@
-package hska.iwi.eShopMaster.model.database.dataobjects;
+package de.hska.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * This class contains details about roles.
  */
+@Entity(name = "role")
 public class Role {
-
+	@JsonProperty("id")
+	@Id
 	private int id;
 
+	@JsonProperty("type")
 	private String type;
 
+	@JsonProperty("level")
 	private int level;
 
 	public Role() {

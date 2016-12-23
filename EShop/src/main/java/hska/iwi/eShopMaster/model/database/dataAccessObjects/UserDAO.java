@@ -16,9 +16,4 @@ public class UserDAO {
 		System.out.println(user.getPassword());
 		return user;
 	}
-
-	public void saveObject(User user) {
-		// TODO Auto-generated method stub
-
-	}
 }
