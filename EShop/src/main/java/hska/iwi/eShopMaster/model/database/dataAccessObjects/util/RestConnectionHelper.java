@@ -21,6 +21,17 @@ public class RestConnectionHelper {
 		return request.post(Entity.json(user));
 	}
 
+	
+	public static Response deleteResponseForURL(String url, User user) {
+		Builder request = getNewRequestBuilderForURL(url);
+		return request.delete();
+	}
+
+	public static Response deleteResponseForURL(String url, Integer requestingUserId) {
+		Builder request = getNewRequestBuilderForURL(url, requestingUserId);
+		return request.delete();
+	}
+	
 	private static Builder getNewRequestBuilderForURL(String url) {
 		Client client = ClientBuilder.newClient();
 		WebTarget resource = client.target(url);
@@ -30,9 +41,9 @@ public class RestConnectionHelper {
 		return request;
 	}
 
-	public static Response deleteResponseForURL(String url, User user) {
-		Builder request = getNewRequestBuilderForURL(url);
-		return request.delete();
+
+	private static Builder getNewRequestBuilderForURL(String url, int requestingUserId) {
+		return getNewRequestBuilderForURL(url).header("userId", requestingUserId);
 	}
 
 }

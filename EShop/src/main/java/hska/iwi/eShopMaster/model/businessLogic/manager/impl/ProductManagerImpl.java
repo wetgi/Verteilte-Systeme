@@ -16,7 +16,7 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	public List<Product> getProducts() {
-		 return helper.getProducts();
+		return helper.getProducts();
 	}
 
 	public List<Product> getProductsForSearchValues(String searchDescription, Double searchMinPrice,
@@ -25,13 +25,11 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	public Product getProductById(int id) {
-		// return helper.getObjectById(id);
-		return null;
+		return helper.getProductById(id);
 	}
 
 	public Product getProductByName(String name) {
-		// return helper.getObjectByName(name);
-		return null;
+		return helper.getProductByName(name);
 	}
 
 	public int addProduct(String name, double price, int categoryId, String details) {
@@ -55,13 +53,8 @@ public class ProductManagerImpl implements ProductManager {
 		return productId;
 	}
 
-	public void deleteProductById(int id) {
-		// helper.deleteById(id);
-	}
-
-	public boolean deleteProductsByCategoryId(int categoryId) {
-		// TODO Auto-generated method stub
-		return false;
+	public void deleteProductById(int id, int requestingUserId) {
+		helper.deleteById(id, requestingUserId);
 	}
 
 }

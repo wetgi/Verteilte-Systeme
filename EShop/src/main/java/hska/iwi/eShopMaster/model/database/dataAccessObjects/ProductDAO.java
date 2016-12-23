@@ -58,9 +58,36 @@ public class ProductDAO {
 		List<Product> products = null;
 		Response response = RestConnectionHelper.getResponseForURL(PRODUCT_BASE_URL);
 		if (response.getStatus() == 200) {
-			products = response.readEntity(new GenericType<List<Product>>(){});
+			products = response.readEntity(new GenericType<List<Product>>() {
+			});
 		}
 		return products;
+	}
+
+	public Product getProductById(int id) {
+		Product product = null;
+		Response response = RestConnectionHelper.getResponseForURL(PRODUCT_BASE_URL + "/" + id);
+		if (response.getStatus() == 200) {
+			product = response.readEntity(Product.class);
+		}
+		return product;
+	}
+
+	public Product getProductByName(String name) {
+		Product product = null;
+		// TODO is this needed?
+		// Response response =
+		// RestConnectionHelper.getResponseForURL(PRODUCT_BASE_URL + "/" +
+		// name);
+		// if (response.getStatus() == 200) {
+		// product = response.readEntity(Product.class);
+		// }
+		return product;
+	}
+
+	public void deleteById(int id, int requestingUserId) {
+		Response response = RestConnectionHelper.deleteResponseForURL(PRODUCT_BASE_URL + "/" + id, requestingUserId);
+		System.out.println("Response product delete: " + response.getStatus());
 	}
 
 }
