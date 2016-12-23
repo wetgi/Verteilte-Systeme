@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.google.common.collect.Lists;
 
@@ -98,6 +99,16 @@ public class UsersApiController implements UsersApi {
 			return new ResponseEntity<Role>(role, HttpStatus.OK);
 		}
 		return new ResponseEntity<Role>(HttpStatus.NO_CONTENT);
+	}
+
+	public ResponseEntity<Void> productsProductIdDelete(
+			@ApiParam(value = "Id of user to delete", required = true) @PathVariable("userId") Integer userId,
+			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer requestUserId) {
+		if (ur.exists(userId)) {
+			ur.delete(userId);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 
 }
