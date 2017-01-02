@@ -12,7 +12,7 @@ public interface ProductManager {
 
 	public Product getProductByName(String name);
 
-	public int addProduct(String name, double price, int categoryId, String details);
+	public void addProduct(String name, double price, int categoryId, String details, int userId);
 
 	public List<Product> getProductsForSearchValues(String searchValue, Double searchMinPrice, Double searchMaxPrice);
 	

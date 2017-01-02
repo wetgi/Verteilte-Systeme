@@ -17,14 +17,8 @@ public class CategoryManagerImpl implements CategoryManager {
 		return helper.getCategories();
 	}
 
-	public Category getCategory(int id) {
-		// return helper.getObjectById(id);
-		return null;
-	}
-
-	public Category getCategoryByName(String name) {
-		// return helper.getObjectByName(name);
-		return null;
+	public Category getCategory(int categoryId) {
+		 return helper.getCategory(categoryId);
 	}
 
 	public void addCategory(String name, int userId) {
@@ -32,14 +26,7 @@ public class CategoryManagerImpl implements CategoryManager {
 		 helper.addCategory(newCategory, userId);
 	}
 
-//	public void delCategory(Category cat) {
-//
-//		// Products are also deleted because of relation in Category.java
-//		 delCategoryById(cat.getCategoryId());
-//	}
-
 	public void delCategoryById(int categoryId, int userId) {
-
 		 helper.deleteCategory(categoryId, userId);
 	}
 }

@@ -64,5 +64,14 @@ public class ProductDAO {
 		Response response = RestConnectionHelper.deleteResponseForURL(PRODUCT_BASE_URL + "/" + id, requestingUserId);
 		System.out.println("Response product delete: " + response.getStatus());
 	}
+	
+	public void addProduct(Product product, int requestingUserId){
+		Response response = RestConnectionHelper.postResponseForURL(PRODUCT_BASE_URL, product, requestingUserId);
+		if (response.getStatus() == 200) {
+			System.out.println("Added Product successfully!");
+		}else{
+			System.err.println("Add Product failed: " + response.getStatus());
+		}
+	}
 
 }

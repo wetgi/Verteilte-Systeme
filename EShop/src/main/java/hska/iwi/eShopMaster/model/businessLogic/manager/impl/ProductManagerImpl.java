@@ -32,25 +32,19 @@ public class ProductManagerImpl implements ProductManager {
 		return helper.getProductByName(name);
 	}
 
-	public int addProduct(String name, double price, int categoryId, String details) {
-		int productId = -1;
-
+	public void addProduct(String name, double price, int categoryId, String details, int userId) {
 		CategoryManager categoryManager = new CategoryManagerImpl();
 		Category category = categoryManager.getCategory(categoryId);
 
-		// if(category != null){
-		// Product product;
-		// if(details == null){
-		// product = new Product(name, price, category);
-		// } else{
-		// product = new Product(name, price, category, details);
-		// }
-		//
-		// helper.saveObject(product);
-		// productId = product.getId();
-		// }
-
-		return productId;
+		 if(category != null){
+			 Product product;
+			 if(details == null){
+				 product = new Product().name(name).price(price).categoryId(categoryId);
+			 } else{
+				 product = new Product().name(name).price(price).categoryId(categoryId).details(details);
+			 }
+			 helper.addProduct(product, userId);
+		 }
 	}
 
 	public void deleteProductById(int id, int requestingUserId) {

@@ -24,6 +24,18 @@ public class CategoryDAO {
 		return categories;
 	}
 	
+	public Category getCategory(int categoryId) {
+		Category category = null;
+		Response response = RestConnectionHelper.getResponseForURL(CATEGORY_BASE_URL + "/" + categoryId);
+		if (response.getStatus() == 200) {
+			category = response.readEntity(new GenericType<Category>() {
+			});
+		}else{
+			System.err.println("Get Category failed: " + response.getStatus());
+		}
+		return category;
+	}
+	
 	public void addCategory(Category newCategory, int userId) {
 		Response response = RestConnectionHelper.postResponseForURL(CATEGORY_BASE_URL, newCategory, userId);
 		if (response.getStatus() == 200) {
