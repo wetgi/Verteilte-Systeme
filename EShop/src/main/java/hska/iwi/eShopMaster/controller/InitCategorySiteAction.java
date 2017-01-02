@@ -29,8 +29,7 @@ public class InitCategorySiteAction extends ActionSupport {
 
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		user = (User) session.get("webshop_user");
-		boolean isAdmin = true;
-		if(user != null && isAdmin) {
+		if(user != null && user.getRole().getType().equals("admin")) {
 
 			CategoryManager categoryManager = new CategoryManagerImpl();
 			this.setCategories(categoryManager.getCategories());

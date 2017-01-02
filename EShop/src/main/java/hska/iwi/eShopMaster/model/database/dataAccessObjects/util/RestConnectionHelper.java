@@ -10,6 +10,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import hska.iwi.eShopMaster.model.database.dataobjects.Category;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
 public class RestConnectionHelper {
@@ -23,16 +24,14 @@ public class RestConnectionHelper {
 		return request.get();
 	}
 
-	public static Response postResponseForURL(String url, User user) {
+	public static <T> Response postResponseForURL(String url, T dataObj) {
 		Builder request = getNewRequestBuilderForURL(url);
-		return request.post(Entity.json(user));
+		return request.post(Entity.json(dataObj));
 	}
-	
 
-
-	public static Response deleteResponseForURL(String url, User user) {
-		Builder request = getNewRequestBuilderForURL(url);
-		return request.delete();
+	public static <T> Response postResponseForURL(String url, T dataObj, int requestingUserId) {
+		Builder request = getNewRequestBuilderForURL(url, requestingUserId);
+		return request.post(Entity.json(dataObj));
 	}
 
 	public static Response deleteResponseForURL(String url, Integer requestingUserId) {

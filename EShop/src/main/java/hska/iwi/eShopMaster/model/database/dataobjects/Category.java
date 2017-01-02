@@ -9,6 +9,12 @@ public class Category {
 	private Integer categoryId = null;
 
 	private String name = null;
+	
+	public Category(){}
+	
+	public Category(String name){
+		this.name = name;
+	}
 
 	public Integer getCategoryId() {
 		return categoryId;

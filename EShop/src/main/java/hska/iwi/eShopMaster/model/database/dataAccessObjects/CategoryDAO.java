@@ -1,50 +1,45 @@
 package hska.iwi.eShopMaster.model.database.dataAccessObjects;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import hska.iwi.eShopMaster.model.database.dataobjects.Product;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
+
+import hska.iwi.eShopMaster.model.database.dataAccessObjects.util.RestConnectionHelper;
+import hska.iwi.eShopMaster.model.database.dataobjects.Category;
 
 public class CategoryDAO {
 	
-	public List<Product> getProductListByCriteria(String searchDescription,
-			Double searchMinPrice, Double searchMaxPrice){
-		
-//	    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//		Transaction transaction = null;
-//		List<Product> productList = null;
-//
-//	    try {
-//			transaction = session.beginTransaction();
-//			Criteria crit = session.createCriteria(Product.class);
-//			
-//			// Define Search HQL:
-//			if (searchDescription != null && searchDescription.length() > 0)
-//			{	// searchValue is set:
-//				searchDescription = "%"+searchDescription+"%";
-//				crit.add(Restrictions.ilike("details", searchDescription ));
-//			}
-//
-//			if (( searchMinPrice != null) && ( searchMaxPrice != null)) {		
-//					crit.add(Restrictions.between("price", searchMinPrice, searchMaxPrice));			
-//				}
-//			else 	if( searchMinPrice != null) {
-//					crit.add(Restrictions.ge("price", searchMinPrice));			
-//					}
-//			else if ( searchMaxPrice != null) {		
-//					crit.add(Restrictions.le("price", searchMaxPrice));			
-//			}
-//
-//			productList = crit.list();
-//		
-//			transaction.commit(); 
-//			
-//		} catch (Exception e) {
-//			transaction.rollback();
-//			e.printStackTrace();
-//		}
-//	    return productList;
-		return new ArrayList<Product>();
+	private static final String CATEGORY_BASE_URL = "http://localhost:8081/product-api/categories";
+	
+	public List<Category> getCategories() {
+		List<Category> categories = null;
+		Response response = RestConnectionHelper.getResponseForURL(CATEGORY_BASE_URL);
+		if (response.getStatus() == 200) {
+			categories = response.readEntity(new GenericType<List<Category>>() {
+			});
+		}else{
+			System.err.println("Get Categories failed: " + response.getStatus());
+		}
+		return categories;
+	}
+	
+	public void addCategory(Category newCategory, int userId) {
+		Response response = RestConnectionHelper.postResponseForURL(CATEGORY_BASE_URL, newCategory, userId);
+		if (response.getStatus() == 200) {
+			System.out.println("Added Category successfully!");
+		}else{
+			System.err.println("Add Category failed: " + response.getStatus());
+		}
+	}
+	
+	public void deleteCategory(int categoryId, int userId) {
+		Response response = RestConnectionHelper.deleteResponseForURL(CATEGORY_BASE_URL + "/" + categoryId, userId);
+		if (response.getStatus() == 200) {
+			System.out.println("Deleted Category successfully!");
+		}else{
+			System.err.println("Delete Category failed: " + response.getStatus());
+		}
 	}
 
 	

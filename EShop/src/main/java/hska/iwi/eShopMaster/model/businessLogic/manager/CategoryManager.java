@@ -12,11 +12,9 @@ public interface CategoryManager {
 	
 	public Category getCategoryByName(String name);
 	
-	public void addCategory(String name);
+	public void addCategory(String name, int userId);
 	
-	public void delCategory(Category cat);
-	
-	public void delCategoryById(int id);
+	public void delCategoryById(int categoryId, int userId);
 
 	
 }

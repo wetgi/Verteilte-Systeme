@@ -70,18 +70,24 @@
 				<s:iterator value="categories" status="rowstatus">
 					<tr>
 					<s:if test="#rowstatus.odd == true">
-						<td class="odd"><s:property value="id" />
+						<td class="odd"><s:property value="categoryId" />
 						<td class="odd"><s:property value="name" /></td>
-						<td class="odd"><a href="<s:url action="DeleteCategoryAction"><s:param name="catId" value="id" /></s:url>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
+						<td class="odd">
+							<a href="<s:url action="DeleteCategoryAction">
+								<s:param name="catId" value="categoryId" /></s:url>">
+								<img src="img/delBtn.png" title="Delete" alt="<s:text name="product.delete" />"/>
+							</a>
+						</td>
 					</s:if>
-					<s:else>
-						<td><s:property value="id" /></td>
+					 	<s:else>
+						<td><s:property value="categoryId" /></td>
 						<td><s:property value="name" /></td>
-						<td><s:form action ="DeleteCategoryAction" >
-								<s:hidden name="catId" value="%{id}" />
-								<s:submit value="loeschen"/>
-							</s:form>
-							</td>
+						<td>
+							<a href="<s:url action="DeleteCategoryAction">
+								<s:param name="catId" value="categoryId" /></s:url>">
+								<img src="img/delBtn.png" title="Delete" alt="<s:text name="product.delete" />"/>
+							</a>
+						</td>
 					</s:else>
 					</tr>
 				</s:iterator>
