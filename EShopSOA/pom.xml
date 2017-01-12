@@ -20,6 +20,7 @@
 		<module>core/category-service</module>
 		<module>support/discovery-server</module>
 		<module>support/edge-server</module>
+		<module>support/auth-service</module>
 		<module>composite/product-category-service</module>
 		<module>composite/user-proxy-service</module>
 		<module>core/products-service</module>
