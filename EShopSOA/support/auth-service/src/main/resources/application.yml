@@ -1,9 +1,6 @@
 server:
   port: 9999
   contextPath: /uaa
-security:
-  user:
-    password: password   
 spring:
   application:
     name: auth-service
