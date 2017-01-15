@@ -5,21 +5,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.web.client.RestTemplate;
 
 import de.hska.model.User;
 
 public class MyAuthenticationManager implements AuthenticationManager, InitializingBean{
 	
-	@Autowired
-	private UserClient userClient;
-	
+	private RestTemplate restTemplate = new RestTemplate();;
+    
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getPrincipal() + "";
@@ -28,11 +27,14 @@ public class MyAuthenticationManager implements AuthenticationManager, Initializ
 	    System.out.println("Auth - Username: " + username);
 	    System.out.println("Auth - Password: " + password);
 	    
-	    User user = new User();
-	    user.setName("admin");
-	    user.setPassword("admin");
+	    User user = restTemplate.getForObject("http://172.23.196.86:8094/users/names/" + username, User.class);
+	    System.out.println("user: " + user.getName());
+	    
+	    //user.setName("admin");
+	    //user.setPassword("admin");
 	    		//userClient.getUser(username).getBody();
 	    		//restTemplate.getForObject("http://user-api/users/names/" + username, User.class);
+	    
 	    if (user == null) {
 	        throw new BadCredentialsException("1000");
 	    }
