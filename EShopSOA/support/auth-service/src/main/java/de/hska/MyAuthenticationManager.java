@@ -24,16 +24,7 @@ public class MyAuthenticationManager implements AuthenticationManager, Initializ
 		String username = authentication.getPrincipal() + "";
 	    String password = authentication.getCredentials() + "";
 	    
-	    System.out.println("Auth - Username: " + username);
-	    System.out.println("Auth - Password: " + password);
-	    
-	    User user = restTemplate.getForObject("http://172.23.196.86:8094/users/names/" + username, User.class);
-	    System.out.println("user: " + user.getName());
-	    
-	    //user.setName("admin");
-	    //user.setPassword("admin");
-	    		//userClient.getUser(username).getBody();
-	    		//restTemplate.getForObject("http://user-api/users/names/" + username, User.class);
+	    User user = restTemplate.getForObject("http://localhost:8094/users/names/" + username, User.class);
 	    
 	    if (user == null) {
 	        throw new BadCredentialsException("1000");
