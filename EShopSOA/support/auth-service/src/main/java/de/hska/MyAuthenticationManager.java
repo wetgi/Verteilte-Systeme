@@ -27,8 +27,6 @@ public class MyAuthenticationManager implements AuthenticationManager {
 		String username = authentication.getPrincipal() + "";
 		String password = authentication.getCredentials() + "";
 
-		System.out.println(restTemplate);
-
 		User user = restTemplate.getForObject("http://user-service/users/names/" + username, User.class);
 
 		if (user == null) {

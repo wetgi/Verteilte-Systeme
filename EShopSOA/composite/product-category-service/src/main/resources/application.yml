@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: product-category-service
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:9999/uaa/user
 eureka:
   client:
     serviceUrl:
