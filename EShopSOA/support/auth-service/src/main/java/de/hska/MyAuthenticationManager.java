@@ -17,7 +17,7 @@ import de.hska.model.User;
 
 public class MyAuthenticationManager implements AuthenticationManager, InitializingBean{
 	
-	private RestTemplate restTemplate = new RestTemplate();;
+	private RestTemplate restTemplate = new RestTemplate();
     
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
