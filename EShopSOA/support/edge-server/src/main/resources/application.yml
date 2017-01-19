@@ -4,10 +4,14 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
     statusPageUrlPath: /info
-    healthCheckUrlPath: /health
+    healthCheckUrlPath: /health  
     
 zuul:
   ignored-services: '*'
   routes:
     product-category-service: /product-api/**
     user-proxy-service: /user-api/**
+   
+security:
+  basic:
+    enabled: false

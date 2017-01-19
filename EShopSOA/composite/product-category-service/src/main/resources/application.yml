@@ -4,6 +4,8 @@ spring:
   application:
     name: product-category-service
 security:
+  basic:
+    enabled: false
   oauth2:
     resource:
       user-info-uri: http://localhost:9999/uaa/user
