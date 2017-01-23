@@ -12,3 +12,9 @@ eureka:
     leaseRenewalIntervalInSeconds: 5
     metadataMap:
       instanceId: "${spring.application.name}:${random.value}"
+security:
+  basic:
+    enabled: false
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:9999/uaa/user

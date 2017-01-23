@@ -25,7 +25,9 @@ public class ProductCategoryServiceController {
 	private ProductClient productClient;
 	
 	// TODO
-	@PreAuthorize("#oauth2.hasScope('webshop')")
+	//@PreAuthorize("#oauth2.hasScope('webshop') and hasRole('XXX')")
+	//@PreAuthorize("hasPermission('XXX')")
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public ResponseEntity<Iterable<Product>> getProducts(
 			@ApiParam(value = "Is contained in product name?") @RequestParam(value = "searchString", required = false) String searchString,
@@ -35,7 +37,7 @@ public class ProductCategoryServiceController {
 		return new ResponseEntity<Iterable<Product>>(productClient.getProducts(searchString, minPrice, maxPrice),
 				HttpStatus.OK);
 	}
-
+	
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.GET)
 	public ResponseEntity<Product> getProduct(@PathVariable Integer productId) {
 		return new ResponseEntity<>(productClient.getProduct(productId), HttpStatus.OK);
@@ -52,13 +54,15 @@ public class ProductCategoryServiceController {
 		return category.getCategoryId() != null ? new ResponseEntity<>(category, HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteProduct(@RequestHeader(value = "userId", required = true) String userId,
 			@PathVariable Integer productId) {
 		return productClient.deleteProduct(userId, productId);
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/categories/{categoryId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteCategory(@RequestHeader(value = "userId", required = true) String userId,
 			@PathVariable Integer categoryId) {
@@ -73,13 +77,15 @@ public class ProductCategoryServiceController {
 
 		return productClient.deleteCategory(userId, categoryId);
 	}
-
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/categories", method = RequestMethod.POST, produces = { "application/json" })
 	public ResponseEntity<Category> createCategory(@RequestHeader(value = "userId", required = true) String userId,
 			@RequestBody Category category) {
 		return new ResponseEntity<Category>(productClient.createCategory(userId, category), HttpStatus.OK);
 	}
-
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/products", method = RequestMethod.POST)
 	public ResponseEntity<Product> createProduct(@RequestHeader(value = "userId", required = true) String userId,
 			@RequestBody Product product) {

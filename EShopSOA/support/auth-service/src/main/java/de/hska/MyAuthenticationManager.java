@@ -38,7 +38,7 @@ public class MyAuthenticationManager implements AuthenticationManager {
 
 		// TODO
 		List<String> userRights = new ArrayList<>();
-		userRights.add("admin");
+		userRights.add(user.getRole().getType().toUpperCase());
 		return new UsernamePasswordAuthenticationToken(username, password,
 				userRights.stream().map(x -> new SimpleGrantedAuthority(x)).collect(Collectors.toList()));
 	}
