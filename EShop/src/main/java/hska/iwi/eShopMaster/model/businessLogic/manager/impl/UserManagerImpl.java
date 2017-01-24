@@ -4,6 +4,7 @@ import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
 import hska.iwi.eShopMaster.model.database.dataAccessObjects.RoleDAO;
 import hska.iwi.eShopMaster.model.database.dataAccessObjects.UserDAO;
 import hska.iwi.eShopMaster.model.database.dataobjects.Role;
+import hska.iwi.eShopMaster.model.database.dataobjects.Token;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
 /**
@@ -70,6 +71,15 @@ public class UserManagerImpl implements UserManager {
 		}
 		
 		return true;
+	}
+
+
+	public Token getToken(String username, String password) {
+		if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+			return null;
+		}
+		
+		return helper.getToken(username, password);
 	}
 
 }

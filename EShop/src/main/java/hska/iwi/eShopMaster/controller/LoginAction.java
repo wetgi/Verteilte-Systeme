@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.UserManagerImpl;
+import hska.iwi.eShopMaster.model.database.dataobjects.Token;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
 public class LoginAction extends ActionSupport {
@@ -29,6 +30,10 @@ public class LoginAction extends ActionSupport {
 		String result = "input";
 
 		UserManager myCManager = new UserManagerImpl();
+		
+		Token token = myCManager.getToken(getUsername(), getPassword());
+		System.out.println(token.getAccessToken());
+		// TODO ...
 		
 		// Get user from DB:
 		User user = myCManager.getUserByUsername(getUsername());
