@@ -12,15 +12,14 @@ import hska.iwi.eShopMaster.model.database.dataobjects.User;
 public class LoginAction extends ActionSupport {
 
 	/**
-     *
-     */
+	 *
+	 */
 	private static final long serialVersionUID = -983183915002226000L;
 	private String username = null;
 	private String password = null;
 	private String firstname;
 	private String lastname;
 	private String role;
-	
 
 	@Override
 	public String execute() throws Exception {
@@ -29,36 +28,38 @@ public class LoginAction extends ActionSupport {
 		String result = "input";
 
 		UserManager myCManager = new UserManagerImpl();
-		
-		// Get user from DB:
-		User user = myCManager.getUserByUsername(getUsername());
 
-		// Does user exist?
+		User user = new User();
+		user.setUsername(getUsername());
+		user.setPassword(getPassword());
+
+		myCManager.getToken(user);
+		// Get user from DB:
+		user = myCManager.getUserByUsername(getUsername());
+
 		if (user != null) {
 			// Is the password correct?
 			if (user.getPassword().equals(getPassword())) {
-				// Get session to save user role and login:
 				Map<String, Object> session = ActionContext.getContext().getSession();
-				
+
 				// Save user object in session:
 				session.put("webshop_user", user);
 				session.put("message", "");
-				firstname= user.getFirstname();
+				firstname = user.getFirstname();
 				lastname = user.getName();
 				role = user.getRole().getType();
 				result = "success";
-			}
-			else {
+			} else {
 				addActionError(getText("error.password.wrong"));
 			}
-		}
-		else {
+		} else {
 			addActionError(getText("error.username.wrong"));
 		}
 
 		return result;
+
 	}
-	
+
 	@Override
 	public void validate() {
 		if (getUsername().length() == 0) {
