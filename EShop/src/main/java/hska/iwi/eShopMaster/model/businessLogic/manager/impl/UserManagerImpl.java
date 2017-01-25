@@ -20,7 +20,7 @@ public class UserManagerImpl implements UserManager {
 		authHelper = new AuthDAO();
 	}
 
-	public void registerUser(String username, String name, String lastname, String password) {
+	public User registerUser(String username, String name, String lastname, String password) {
 		User user = new User();
 		user.setFirstname(name);
 		user.setName(lastname);
@@ -31,7 +31,7 @@ public class UserManagerImpl implements UserManager {
 		user.setRole(role);
 		user.setLevel(role.getLevel());
 
-		helper.saveUser(user);
+		return helper.saveUser(user);
 	}
 
 	public User getUserByUsername(String username) {

@@ -51,9 +51,6 @@ public class UsersApiController implements UsersApi {
 
 	public ResponseEntity<User> usersPost(
 			@ApiParam(value = "Information about the new user.", required = true) @RequestBody User newUser) {
-		// !TODO check if user is eligible
-		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
-		// !TODO check if new user is valid?
 		String username = newUser.getUsername();
 		if (ur.findByUsername(username) == null) {
 			ur.save(newUser);
