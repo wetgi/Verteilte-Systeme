@@ -39,7 +39,7 @@ public class LoginAction extends ActionSupport {
 
 		if (user != null) {
 			// Is the password correct?
-			if (user.getPassword().equals(getPassword())) {
+			if (user.getPassword() != null && user.getPassword().equals(getPassword())) {
 				Map<String, Object> session = ActionContext.getContext().getSession();
 
 				// Save user object in session:
