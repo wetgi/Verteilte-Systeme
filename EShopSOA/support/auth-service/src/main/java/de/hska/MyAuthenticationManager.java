@@ -30,10 +30,10 @@ public class MyAuthenticationManager implements AuthenticationManager {
 		User user = restTemplate.getForObject("http://user-service/users/names/" + username, User.class);
 
 		if (user == null) {
-			throw new BadCredentialsException("1000");
+			throw new BadCredentialsException("999");
 		}
 		if (!password.equals(user.getPassword())) {
-			throw new BadCredentialsException("1000");
+			throw new BadCredentialsException("1001");
 		}
 
 		// TODO
