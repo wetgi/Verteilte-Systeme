@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpMethod;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import hska.iwi.eShopMaster.configuration.RestTemplateFactory;
@@ -37,7 +38,11 @@ public class CategoryDAO {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(CATEGORY_BASE_URL)
 				.pathSegment(String.valueOf(categoryId));
 
-		RestTemplateFactory.getRestTemplate().exchange(builder.build().encode().toUri(), HttpMethod.DELETE, null,
-				Void.class);
+		try {
+			RestTemplateFactory.getRestTemplate().exchange(builder.build().encode().toUri(), HttpMethod.DELETE, null,
+					Void.class);
+		} catch (HttpClientErrorException e) {
+			System.out.println("Conflict error: There are currently products in this category.");
+		}
 	}
 }
