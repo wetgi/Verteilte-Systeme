@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.google.common.collect.Lists;
 
@@ -37,20 +36,13 @@ public class CategoriesApiController implements CategoriesApi {
 	}
 
 	public ResponseEntity<Category> categoriesPost(
-			@ApiParam(value = "Information about the new category.", required = true) @RequestBody Category newCategory,
-			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
-		// !TODO check if user is eligible
-		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
-		// !TODO check if new product is valid?
+			@ApiParam(value = "Information about the new category.", required = true) @RequestBody Category newCategory) {
 		cr.save(newCategory);
-		return new ResponseEntity<Category>(HttpStatus.OK);
+		return new ResponseEntity<Category>(newCategory, HttpStatus.OK);
 	}
 
 	public ResponseEntity<Void> categoriesCategoryIdDelete(
-			@ApiParam(value = "Deletes a category", required = true) @PathVariable("categoryId") Integer categoryId,
-			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
-		// !TODO check if user is eligible
-		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
+			@ApiParam(value = "Deletes a category", required = true) @PathVariable("categoryId") Integer categoryId) {
 		if (cr.exists(categoryId)) {
 			cr.delete(categoryId);
 			return new ResponseEntity<Void>(HttpStatus.OK);

@@ -21,12 +21,12 @@ public class CategoryManagerImpl implements CategoryManager {
 		 return helper.getCategory(categoryId);
 	}
 
-	public void addCategory(String name, int userId) {
+	public void addCategory(String name) {
 		 Category newCategory = new Category(name);
-		 helper.addCategory(newCategory, userId);
+		 helper.addCategory(newCategory);
 	}
 
-	public void delCategoryById(int categoryId, int userId) {
-		 helper.deleteCategory(categoryId, userId);
+	public void delCategoryById(int categoryId) {
+		 helper.deleteCategory(categoryId);
 	}
 }

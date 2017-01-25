@@ -10,9 +10,9 @@ public interface CategoryManager {
 	
 	public Category getCategory(int id);
 	
-	public void addCategory(String name, int userId);
+	public void addCategory(String name);
 	
-	public void delCategoryById(int categoryId, int userId);
+	public void delCategoryById(int categoryId);
 
 	
 }

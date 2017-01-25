@@ -33,7 +33,7 @@ public class AddCategoryAction extends ActionSupport {
 		if(user != null && (user.getRole().getType().equals("admin"))) {
 			CategoryManager categoryManager = new CategoryManagerImpl();
 			// Add category
-			categoryManager.addCategory(newCatName, user.getUserId());
+			categoryManager.addCategory(newCatName);
 			
 			// Go and get new Category list
 			this.setCategories(categoryManager.getCategories());

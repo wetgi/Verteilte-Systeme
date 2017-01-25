@@ -10,13 +10,11 @@ public interface ProductManager {
 
 	public Product getProductById(int id);
 
-	public Product getProductByName(String name);
-
-	public void addProduct(String name, double price, int categoryId, String details, int userId);
+	public void addProduct(String name, double price, int categoryId, String details);
 
 	public List<Product> getProductsForSearchValues(String searchValue, Double searchMinPrice, Double searchMaxPrice);
 	
-    public void deleteProductById(int id, int requestingUserId);
+    public void deleteProductById(int id);
     
 	
 }

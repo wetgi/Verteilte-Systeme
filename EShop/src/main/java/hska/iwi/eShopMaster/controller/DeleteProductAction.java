@@ -26,7 +26,7 @@ public class DeleteProductAction extends ActionSupport {
 
 		if (user != null && (user.getRole().getType().equals("admin"))) {
 
-			new ProductDAO().deleteById(id, user.getUserId());
+			new ProductDAO().deleteById(id);
 			{
 				res = "success";
 			}

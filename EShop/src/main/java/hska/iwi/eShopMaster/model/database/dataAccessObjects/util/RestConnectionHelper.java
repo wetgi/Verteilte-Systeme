@@ -10,9 +10,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import hska.iwi.eShopMaster.model.database.dataobjects.Category;
-import hska.iwi.eShopMaster.model.database.dataobjects.User;
-
 public class RestConnectionHelper {
 	public static Response getResponseForURL(String url) {
 		Builder request = getNewRequestBuilderForURL(url);

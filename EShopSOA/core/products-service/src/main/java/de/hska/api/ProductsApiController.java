@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,20 +40,13 @@ public class ProductsApiController implements ProductsApi {
 	}
 
 	public ResponseEntity<Product> productsPost(
-			@ApiParam(value = "Information about the new product.", required = true) @RequestBody Product newProduct,
-			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
-		// !TODO check if user is eligible
-		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
-		// !TODO check if new product is valid?
+			@ApiParam(value = "Information about the new product.", required = true) @RequestBody Product newProduct) {
 		pr.save(newProduct);
-		return new ResponseEntity<Product>(HttpStatus.OK);
+		return new ResponseEntity<Product>(newProduct, HttpStatus.OK);
 	}
 
 	public ResponseEntity<Void> productsProductIdDelete(
-			@ApiParam(value = "Deletes a product", required = true) @PathVariable("productId") Integer productId,
-			@ApiParam(value = "The requesting user", required = true) @RequestHeader(value = "userId", required = true) Integer userId) {
-		// !TODO check if user is eligible
-		// return new ResponseEntity<Product>(HttpStatus.METHOD_NOT_ALLOWED);
+			@ApiParam(value = "Deletes a product", required = true) @PathVariable("productId") Integer productId) {
 		if (pr.exists(productId)) {
 			pr.delete(productId);
 			return new ResponseEntity<Void>(HttpStatus.OK);
