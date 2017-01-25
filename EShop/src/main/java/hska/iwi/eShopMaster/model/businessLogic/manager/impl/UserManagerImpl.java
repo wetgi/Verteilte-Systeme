@@ -2,7 +2,6 @@ package hska.iwi.eShopMaster.model.businessLogic.manager.impl;
 
 import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
 import hska.iwi.eShopMaster.model.database.dataAccessObjects.AuthDAO;
-import hska.iwi.eShopMaster.model.database.dataAccessObjects.RoleDAO;
 import hska.iwi.eShopMaster.model.database.dataAccessObjects.UserDAO;
 import hska.iwi.eShopMaster.model.database.dataobjects.Role;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
@@ -21,12 +20,14 @@ public class UserManagerImpl implements UserManager {
 		authHelper = new AuthDAO();
 	}
 
-	public void registerUser(String username, String name, String lastname, String password, Role role) {
+	public void registerUser(String username, String name, String lastname, String password) {
 		User user = new User();
 		user.setFirstname(name);
 		user.setName(lastname);
 		user.setUsername(username);
 		user.setPassword(password);
+		
+		Role role = new Role(2, "user", 1);
 		user.setRole(role);
 		user.setLevel(role.getLevel());
 
@@ -45,11 +46,6 @@ public class UserManagerImpl implements UserManager {
 		user.setUserId(id);
 		helper.deleteUser(user);
 		return false;
-	}
-
-	public Role getRoleByLevel(int level) {
-		RoleDAO roleHelper = new RoleDAO();
-		return roleHelper.getRoleByLevel(level);
 	}
 
 	public boolean doesUserAlreadyExist(String username) {

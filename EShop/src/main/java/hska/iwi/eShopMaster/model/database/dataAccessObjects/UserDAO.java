@@ -14,6 +14,12 @@ public class UserDAO {
 
 	public User getUserByUsername(String name) {
 		ResponseEntity<User> response = null;
+		
+		// we have no token for this user
+		if(RestTemplateFactory.getRestTemplate() == null) {
+			return getUserByUsernameWithoutToken(name);
+		}
+		
 		try {
 			response = RestTemplateFactory.getRestTemplate().getForEntity(USER_BASE_URL + "/names/" + name, User.class);
 		} catch (OAuth2AccessDeniedException e) {
@@ -27,6 +33,15 @@ public class UserDAO {
 			} 
 		}
 		return response.getBody();
+	}
+	
+	private User getUserByUsernameWithoutToken(String name) {
+		User user = null;
+		Response response = RestConnectionHelper.getResponseForURL(USER_BASE_URL + "/names/" + name);
+		if (response.getStatus() == 200) {
+			user = response.readEntity(User.class);
+		}
+		return user;
 	}
 
 	public void saveUser(User user) {

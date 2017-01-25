@@ -58,7 +58,7 @@ public class UsersApiController implements UsersApi {
 		if (ur.findByUsername(username) == null) {
 			ur.save(newUser);
 			newUser.setRole(usersUserRoleGet(newUser.getLevel()).getBody());
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(newUser, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
 	}
