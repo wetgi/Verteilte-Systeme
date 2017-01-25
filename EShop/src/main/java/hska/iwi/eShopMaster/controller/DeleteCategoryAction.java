@@ -8,6 +8,8 @@ import hska.iwi.eShopMaster.model.database.dataobjects.User;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.client.HttpClientErrorException;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -32,9 +34,13 @@ public class DeleteCategoryAction extends ActionSupport {
 
 			// Helper inserts new Category in DB:
 			CategoryManager categoryManager = new CategoryManagerImpl();
-		
-			categoryManager.delCategoryById(catId);
-
+			try{
+				categoryManager.delCategoryById(catId);
+			}
+			catch(HttpClientErrorException e){
+				addActionError(getText("error.category.delete.failed"));
+			}
+			
 			categories = categoryManager.getCategories();
 				
 			res = "success";
